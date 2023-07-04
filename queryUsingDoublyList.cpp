@@ -5,11 +5,13 @@ class Node
 {
 public:
     int val;
+    Node *prev;
     Node *next;
 
     Node(int val)
     {
         this->val = val;
+        this->prev = NULL;
         this->next = NULL;
     }
 };
@@ -33,7 +35,9 @@ public:
         }
         else
         {
+
             tail->next = newNode;
+            newNode->prev = tail;
             tail = newNode;
         }
     }
@@ -49,12 +53,16 @@ public:
             sz--;
             Node *deleteNode = head;
             head = head->next;
-            delete deleteNode;
-
             if (head == NULL)
             {
                 tail = NULL;
             }
+            else
+            {
+
+                head->prev = NULL;
+            }
+            delete deleteNode;
         }
     }
 
